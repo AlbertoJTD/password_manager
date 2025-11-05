@@ -1,0 +1,36 @@
+<%= form_with model: password, url: passwords_path do |f| %>
+  <div class="">
+    <% f.object.errors.full_messages.each do |message| %>
+      <div class="text-red-500"><%= message %></div>
+    <% end %>
+  </div>
+
+  <div class="space-y-3 mb-5">
+    <div>
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'border-b border-b-gray-800' %>
+    </div>
+
+    <div>
+      <%= f.label :service %>
+      <%= f.text_field :service, class: 'border-b border-b-gray-800' %>
+    </div>
+
+    <div>
+      <%= f.label :url %>
+      <%= f.text_field :url, class: 'border-b border-b-gray-800' %>
+    </div>
+
+    <div>
+      <%= f.label :username %>
+      <%= f.text_field :username, class: 'border-b border-b-gray-800' %>
+    </div>
+
+    <div>
+      <%= f.label :password %>
+      <%= f.password_field :password, class: 'border-b border-b-gray-800' %>
+    </div>
+  </div>
+
+  <%= f.submit 'Save Password', class: 'bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600' %>
+<% end %>
