@@ -28,4 +28,7 @@
   </div>
 
   <%= f.submit 'Save Password', class: 'bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600' %>
+  <%= button_tag 'Delete', form: 'delete_password', class: 'bg-red-500 text-white rounded-md px-4 py-2 hover:bg-red-600' if password.persisted? %>
 <% end %>
+
+<%= form_with model: password, method: :delete, id: 'delete_password', data: { turbo_confirm: 'Are you sure you want to delete this password?' } %>

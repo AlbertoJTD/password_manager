@@ -34,7 +34,7 @@ class PasswordsController < ApplicationController
 
   def destroy
     @password.destroy
-    redirect_to passwords_path, notice: 'Password deleted successfully'
+    redirect_to root_path, notice: 'Password deleted successfully'
   end
 
   private
