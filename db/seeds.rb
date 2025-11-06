@@ -8,9 +8,18 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-user = User.last
+5.times do
+  password = Faker::Internet.password
+  User.create!(
+    email: Faker::Internet.email,
+    password: password,
+    password_confirmation: password,
+    confirmed_at: Time.now
+  )
+end
 
-20.times do
+50.times do
+  user = User.all.sample
   user.passwords.create(
     service: Faker::Company.name,
     url: Faker::Internet.url,

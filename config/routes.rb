@@ -8,5 +8,7 @@ Rails.application.routes.draw do
   root 'passwords#index'
 
   devise_for :users
-  resources :passwords
+  resources :passwords do
+    resources :shares, only: %i[new create destroy], module: :passwords
+  end
 end
