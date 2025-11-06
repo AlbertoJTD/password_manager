@@ -24,9 +24,18 @@ class PasswordsController < ApplicationController
 
   def edit; end
 
-  def update; end
+  def update
+    if @password.update(password_params)
+      redirect_to @password, notice: 'Password updated successfully'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
 
-  def destroy; end
+  def destroy
+    @password.destroy
+    redirect_to passwords_path, notice: 'Password deleted successfully'
+  end
 
   private
 
