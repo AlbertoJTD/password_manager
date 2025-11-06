@@ -5,5 +5,5 @@ class Password < ApplicationRecord
   encrypts :username, deterministic: true # Allows for searching by username
   encrypts :password
 
-  validates :name, :username, :password, presence: true
+  validates :service, :username, :password, presence: true
 end
