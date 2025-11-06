@@ -31,7 +31,7 @@ class PasswordsController < ApplicationController
   private
 
   def password_params
-    params.require(:password).permit(:name, :service, :url, :username, :password)
+    params.require(:password).permit(:service, :url, :username, :password)
   end
 
   def set_password
