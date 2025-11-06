@@ -5,9 +5,7 @@
     <%= link_to 'New Password', new_password_path, class: 'bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600' %>
   </div>
 
-  <ul>
-    <% @passwords.each do |password| %>
-      <li><%= password.service %></li>
-    <% end %>
-  </ul>
+  <div class="grid grid-cols-3 gap-4 mt-5">
+    <%= render collection: @passwords, partial: 'password' %>
+  </div>
 </div>

@@ -7,3 +7,14 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+user = User.last
+
+20.times do
+  user.passwords.create(
+    service: Faker::Company.name,
+    url: Faker::Internet.url,
+    username: Faker::Internet.username,
+    password: Faker::Internet.password
+  )
+end
