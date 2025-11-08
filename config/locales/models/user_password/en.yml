@@ -1,0 +1,17 @@
+en:
+  activerecord:
+    models:
+      user_password: User Password
+    attributes:
+      user_password:
+        role: Role
+        user: User
+        password: Password
+    
+    enums:
+      user_password:
+        role:
+          viewer: Viewer
+          editor: Editor
+          owner: Owner
+          manager: Manager

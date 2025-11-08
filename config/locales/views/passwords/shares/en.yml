@@ -1,0 +1,13 @@
+en:
+  passwords:
+    shares:
+      new:
+        title: Share Password
+        submit: Share Password
+        new_password: New Password
+        description: Select a user and assign a role to share access to this password.
+        user_label: User
+        user_prompt: Select a user...
+        role_label: Role
+        role_prompt: Select a role...
+

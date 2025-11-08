@@ -1,0 +1,13 @@
+es:
+  passwords:
+    shares:
+      new:
+        title: Compartir contraseña
+        submit: Compartir contraseña
+        new_password: Nueva contraseña
+        description: Selecciona un usuario y asigna un rol para compartir acceso a esta contraseña.
+        user_label: Usuario
+        user_prompt: Selecciona un usuario...
+        role_label: Rol
+        role_prompt: Selecciona un rol...
+
