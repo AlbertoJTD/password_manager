@@ -1,8 +1,8 @@
 class PasswordsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_password, only: %i[show edit update destroy]
-  before_action :require_editor_or_owner, only: %i[edit update]
-  before_action :require_owner_permissions, only: %i[destroy]
+  before_action :require_editable_permissions, only: %i[edit update]
+  before_action :require_deletable_permissions, only: %i[destroy]
 
   def index
     @passwords = current_user.passwords
@@ -48,13 +48,14 @@ class PasswordsController < ApplicationController
 
   def set_password
     @password = current_user.passwords.find(params[:id])
+    @user_password = current_user.user_passwords.find_by(password: @password)
   end
 
-  def require_editor_or_owner
-    redirect_to @password, alert: 'You are not authorized to edit this password' unless @password.editable_by?(current_user)
+  def require_editable_permissions
+    redirect_to @password, alert: 'You are not authorized to edit this password' unless @user_password.editable?
   end
 
-  def require_owner_permissions
-    redirect_to @password, alert: 'You are not authorized to delete this password' unless @password.deletable_by?(current_user)
+  def require_deletable_permissions
+    redirect_to @password, alert: 'You are not authorized to delete this password' unless @user_password.deletable?
   end
 end
