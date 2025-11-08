@@ -1,17 +1,64 @@
-<h1>Share password</h1>
+<%= turbo_frame_tag :modal do %>
+  <%= render Shared::ModalComponent.new do %>
+    <!-- Header Section -->
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-cyan-600">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+        </svg>
+        Share Password
+      </h1>
+      <p class="text-sm text-gray-600 mt-1">Select a user and assign a role to share access to this password.</p>
+    </div>
 
-<%= form_with model: current_user_password, url: password_shares_path(password_id: @password.id) do |f| %>
-  <div>
-    <%= f.label :user_id %>
-    <%= f.collection_select :user_id, @users, :id, :email %>
-  </div>
+    <%= form_with model: current_user_password, url: password_shares_path(password_id: @password.id), method: :post, class: 'mt-6' do |f| %>
+      <% if f.object.errors.any? %>
+        <%= render Shared::ErrorListComponent.new do %>
+          <% f.object.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        <% end %>
+      <% end %>
 
-  <div>
-    <%= f.label :role %>
-    <%= f.select :role, @roles %>
-  </div>
+      <div class="space-y-6">
+        <!-- User Selection -->
+        <div>
+          <%= f.label :user_id, class: 'block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2' do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+            </svg>
+            User
+          <% end %>
+          <%= f.collection_select :user_id, @users, :id, :email, 
+              { prompt: 'Select a user...' },
+              { class: 'w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors outline-none bg-white' } %>
+        </div>
 
-  <div>
-    <%= f.submit 'Share' %>
-  </div>
+        <!-- Role Selection -->
+        <div>
+          <%= f.label :role, class: 'block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2' do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+            </svg>
+            Role
+          <% end %>
+          <%= f.select :role, @roles.map { |role| [role.humanize, role] }, 
+              { prompt: 'Select a role...' },
+              { class: 'w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors outline-none bg-white' } %>
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="mt-8 flex items-center justify-end gap-3 pt-6 border-t border-gray-200">
+        <%= button_tag type: 'submit', 
+            class: 'inline-flex items-center gap-2 px-6 py-2.5 bg-cyan-500 text-white rounded-lg font-medium hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2 transition-colors' do %>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM3 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 019.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+          </svg>
+          <span>Share Password</span>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
 <% end %>
+  
