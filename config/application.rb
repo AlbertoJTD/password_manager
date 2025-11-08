@@ -29,5 +29,10 @@ module PasswordManager
     end
 
     config.importmap.cache_sweepers << Rails.root.join('app/components')
+
+    # Internationalization configuration
+    config.i18n.available_locales = %i[en es]
+    config.i18n.default_locale = :en
+    config.i18n.fallbacks = true
   end
 end

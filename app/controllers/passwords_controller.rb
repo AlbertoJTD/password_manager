@@ -20,7 +20,7 @@ class PasswordsController < ApplicationController
 
     if @password.save
       respond_to do |format|
-        format.html { redirect_to @password, notice: 'Password created successfully' }
+        format.html { redirect_to @password, notice: t('passwords.created') }
         format.turbo_stream
       end
     else
@@ -32,7 +32,7 @@ class PasswordsController < ApplicationController
 
   def update
     if @password.update(password_params)
-      redirect_to @password, notice: 'Password updated successfully'
+      redirect_to @password, notice: t('passwords.updated')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -42,7 +42,7 @@ class PasswordsController < ApplicationController
     @password.destroy
 
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Password deleted successfully' }
+      format.html { redirect_to root_path, notice: t('passwords.deleted') }
       format.turbo_stream
     end
   end
@@ -58,10 +58,10 @@ class PasswordsController < ApplicationController
   end
 
   def require_editable_permissions
-    redirect_to @password, alert: 'You are not authorized to edit this password' unless current_user_password.editable?
+    redirect_to @password, alert: t('passwords.not_authorized_edit') unless current_user_password.editable?
   end
 
   def require_deletable_permissions
-    redirect_to @password, alert: 'You are not authorized to delete this password' unless current_user_password.deletable?
+    redirect_to @password, alert: t('passwords.not_authorized_delete') unless current_user_password.deletable?
   end
 end

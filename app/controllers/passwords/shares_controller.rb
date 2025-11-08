@@ -14,7 +14,7 @@ class Passwords::SharesController < ApplicationController
 
     if @user_password.persisted?
       respond_to do |format|
-        format.html { redirect_to @password, notice: 'Password shared successfully' }
+        format.html { redirect_to @password, notice: t('sharing.shared_successfully') }
         format.turbo_stream
       end
     else
@@ -28,7 +28,7 @@ class Passwords::SharesController < ApplicationController
   def destroy
     @user_password = @password.user_passwords.find_by(user_id: params[:id])
     @user_password.destroy
-    redirect_to @password, notice: 'Password removed from user'
+    redirect_to @password, notice: t('sharing.removed_successfully')
   end
 
   private
@@ -42,6 +42,6 @@ class Passwords::SharesController < ApplicationController
   end
 
   def require_sharable_permissions
-    redirect_to @password, alert: 'You are not authorized to share this password' unless current_user_password.sharable?
+    redirect_to @password, alert: t('sharing.not_authorized') unless current_user_password.sharable?
   end
 end
