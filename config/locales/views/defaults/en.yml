@@ -1,0 +1,5 @@
+en:
+  clipboard:
+    copy: Copy
+    copied: Copied!
+    failed: Failed to copy to clipboard

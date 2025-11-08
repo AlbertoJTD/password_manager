@@ -1,0 +1,6 @@
+es:
+  clipboard:
+    copy: Copiar
+    copied: ¡Copiado!
+    failed: Fallo al copiar al portapapeles
+

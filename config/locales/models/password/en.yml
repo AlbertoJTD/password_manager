@@ -1,0 +1,10 @@
+en:
+  activerecord:
+    models:
+      password: Password
+    attributes:
+      password:
+        service: Service
+        url: URL
+        username: Username
+        password: Password

@@ -1,0 +1,10 @@
+es:
+  activerecord:
+    models:
+      book: Libro
+    attributes:
+      password:
+        service: Servicio
+        url: URL
+        username: Nombre de usuario
+        password: Contraseña

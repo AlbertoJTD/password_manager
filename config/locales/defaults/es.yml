@@ -1,0 +1,10 @@
+es:
+  # Application
+  app_name: Gestor de Contraseñas
+  
+  # Navigation
+  home: Inicio
+  profile: Perfil
+  logout: Cerrar sesión
+  login: Iniciar sesión
+  sign_up: Registrarse

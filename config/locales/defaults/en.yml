@@ -1,0 +1,11 @@
+en:
+  # Application
+  app_name: Password Manager
+  
+  # Navigation
+  home: Home
+  profile: Profile
+  logout: Logout
+  login: Login
+  sign_up: Sign up
+

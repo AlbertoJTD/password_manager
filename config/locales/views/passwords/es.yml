@@ -1,0 +1,40 @@
+es:
+  passwords:
+    index:
+      title: Todas las contraseñas
+      new: Nueva contraseña
+    show:
+      title: Ver contraseña
+    edit:
+      title: Editar contraseña
+      short: Editar
+    update:
+      title: Actualizar contraseña
+    destroy:
+      title: Eliminar contraseña
+    new:
+      title: Nueva contraseña
+
+    # Password Form
+    forms:
+      service_label: Servicio
+      service_placeholder: e.g., Gmail, GitHub, Facebook
+      url_label: URL
+      url_placeholder: https://example.com
+      username_label: Nombre de usuario
+      username_placeholder: Ingresa tu nombre de usuario o email
+      password_label: Contraseña
+      password_placeholder: Ingresa tu contraseña
+    
+    delete: Eliminar
+    save: Guardar contraseña
+    delete_confirm: ¿Estás seguro que deseas eliminar esta contraseña?
+    delete_confirm_full: ¿Estás seguro que deseas eliminar esta contraseña? Esta acción no se puede deshacer.
+    credentials: Credenciales
+    username: Nombre de usuario
+    copy: Copiar
+    shared_with: Compartido con
+    add_user: Agregar usuario
+    remove_user_confirm: ¿Estás seguro que deseas eliminar este usuario?
+    remove: Eliminar
+    password: Contraseña

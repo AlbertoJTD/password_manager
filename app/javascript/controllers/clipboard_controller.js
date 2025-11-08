@@ -3,7 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="clipboard"
 export default class extends Controller {
   static values = {
-    content: String
+    content: String,
+    copiedMessage: String
   }
 
   connect() {
@@ -13,7 +14,7 @@ export default class extends Controller {
   copy() {
     navigator.clipboard.writeText(this.contentValue).then(
       () => {
-        this.element.textContent = 'Copied!';
+        this.element.textContent = this.copiedMessageValue;
         setTimeout(() => {
           this.element.innerHTML = this.originalText;
         }, 1500);
