@@ -8,6 +8,28 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+user = User.create!(
+  email: 'admin@example.com',
+  password: 'password',
+  password_confirmation: 'password',
+  confirmed_at: Time.now
+)
+
+50.times do
+  password = Password.create!(
+    service: Faker::Company.name,
+    url: Faker::Internet.url,
+    username: Faker::Internet.username,
+    password: Faker::Internet.password
+  )
+
+  UserPassword.create!(
+    user: user,
+    password: password,
+    role: 'owner'
+  )
+end
+
 5.times do
   password = Faker::Internet.password
   User.create!(
@@ -20,10 +42,16 @@ end
 
 50.times do
   user = User.all.sample
-  user.passwords.create(
+  password = Password.create!(
     service: Faker::Company.name,
     url: Faker::Internet.url,
     username: Faker::Internet.username,
     password: Faker::Internet.password
+  )
+
+  UserPassword.create!(
+    user: user,
+    password: password,
+    role: 'owner'
   )
 end
