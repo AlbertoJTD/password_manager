@@ -37,7 +37,11 @@ class PasswordsController < ApplicationController
 
   def destroy
     @password.destroy
-    redirect_to root_path, notice: 'Password deleted successfully'
+
+    respond_to do |format|
+      format.html { redirect_to root_path, notice: 'Password deleted successfully' }
+      format.turbo_stream
+    end
   end
 
   private

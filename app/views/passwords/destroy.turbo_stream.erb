@@ -1,0 +1,7 @@
+<%= turbo_stream.remove dom_id(@password) %>
+
+<%= turbo_stream.after :modal do %>
+  <script>
+    window.dispatchEvent(new CustomEvent('close-modal'));
+  </script>
+<% end %>
