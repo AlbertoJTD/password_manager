@@ -7,7 +7,7 @@ export default class extends Controller {
   }
 
   connect() {
-    this.originalText = this.element.textContent;
+    this.originalText = this.element.innerHTML;
   }
 
   copy() {
@@ -15,7 +15,7 @@ export default class extends Controller {
       () => {
         this.element.textContent = 'Copied!';
         setTimeout(() => {
-          this.element.textContent = this.originalText;
+          this.element.innerHTML = this.originalText;
         }, 1500);
       },
       () => {
