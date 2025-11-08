@@ -48,14 +48,13 @@ class PasswordsController < ApplicationController
 
   def set_password
     @password = current_user.passwords.find(params[:id])
-    @user_password = current_user.user_passwords.find_by(password: @password)
   end
 
   def require_editable_permissions
-    redirect_to @password, alert: 'You are not authorized to edit this password' unless @user_password.editable?
+    redirect_to @password, alert: 'You are not authorized to edit this password' unless current_user_password.editable?
   end
 
   def require_deletable_permissions
-    redirect_to @password, alert: 'You are not authorized to delete this password' unless @user_password.deletable?
+    redirect_to @password, alert: 'You are not authorized to delete this password' unless current_user_password.deletable?
   end
 end

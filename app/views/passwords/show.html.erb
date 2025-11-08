@@ -19,10 +19,10 @@
   </h2>
 
   <div class="my-2">
-    <% if @user_password.editable? %>
+    <% if current_user_password.editable? %>
       <%= link_to 'Edit', edit_password_path(@password), class: 'bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600' %>
 
-      <% if @user_password.sharable? %>
+      <% if current_user_password.sharable? %>
         <%= link_to 'Delete', password_path(@password), data: {
                                                           turbo_method: :delete,
                                                           turbo_confirm: 'Are you sure you want to delete this password?'
@@ -57,7 +57,7 @@
 <hr class="my-4">
 <h5 class="text-lg font-bold mb-5">Share this password</h5>
 <%= link_to 'Add a user', new_password_share_path(@password),
-            class: 'bg-cyan-500 text-white rounded-md px-4 py-2 hover:bg-cyan-600' if @user_password.sharable? %>
+            class: 'bg-cyan-500 text-white rounded-md px-4 py-2 hover:bg-cyan-600' if current_user_password.sharable? %>
 
 <div class="w-1/3 space-y-2">
   <% @password.user_passwords.includes(:user).each do |user_password| %>
@@ -68,7 +68,7 @@
                               turbo_method: :delete,
                               turbo_confirm: 'Are you sure you want to remove this user?'
                             },
-                            class: 'bg-red-500 text-white rounded-md px-4 py-1 hover:bg-red-600' if @user_password.sharable? %>
+                            class: 'bg-red-500 text-white rounded-md px-4 py-1 hover:bg-red-600' if current_user_password.sharable? %>
     </div>
   <% end %>
 </div>

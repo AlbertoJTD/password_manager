@@ -1,6 +1,7 @@
 class Passwords::SharesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_password, only: %i[new create destroy]
+  before_action :set_password
+  before_action :require_sharable_permissions
 
   def new
     @users = User.all.excluding(@password.users)
@@ -35,5 +36,9 @@ class Passwords::SharesController < ApplicationController
 
   def user_password_params
     params.require(:user_password).permit(:user_id, :role)
+  end
+
+  def require_sharable_permissions
+    redirect_to @password, alert: 'You are not authorized to share this password' unless current_user_password.sharable?
   end
 end
