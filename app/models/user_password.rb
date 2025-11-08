@@ -9,7 +9,7 @@ class UserPassword < ApplicationRecord
     manager: 'MANAGER'
   }, default: :viewer, scopes: true
 
-  validates :role, presence: true, inclusion: { in: UserPassword.roles.except(:owner).keys }
+  validates :role, presence: true, inclusion: { in: UserPassword.roles.keys }
 
   def editable?
     owner? || editor? || manager?

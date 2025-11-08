@@ -1,0 +1,8 @@
+<div data-controller="shared--modal-component">
+  <div data-action="click->shared--modal-component#close" class="fixed z-10 w-full h-full top-0 left-0 bg-black/40"></div>
+  <div data-shared--modal-component-target="sidebar" class="fixed top-0 right-0 z-20 w-1/2 sm:w-3/6 lg:w-2/6 h-full bg-white overflow-y-scroll shadow flex flex-col ease-in-out duration-300 p-5 translate-x-full">
+    <button type="button" data-action="click->shared--modal-component#close" class="p-3 rounded-md hover:bg-gray-100 w-fit"><%= image_tag 'icons/close.svg', width: 35, height: 35 %></button>
+    
+    <%= content %>
+  </div>
+</div>
