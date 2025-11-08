@@ -23,7 +23,7 @@ class Passwords::SharesController < ApplicationController
   end
 
   def destroy
-    @user_password = @password.user_passwords.find_by(user_id: params[:user_password_id])
+    @user_password = @password.user_passwords.find_by(user_id: params[:id])
     @user_password.destroy
     redirect_to @password, notice: 'Password removed from user'
   end

@@ -8,11 +8,11 @@ export default class extends Controller {
       this.sidebarTarget.classList.replace("translate-x-full", "translate-x-0");
     }, 50);
 
-    this.element.addEventListener("turbo:submit-end", (event) => {
-      if (event.detail.success) {
-        Turbo.visit(event.detail.fetchResponse.response.url);
-      }
-    });
+    // this.element.addEventListener("turbo:submit-end", (event) => {
+    //   if (event.detail.success) {
+    //     Turbo.visit(event.detail.fetchResponse.response.url);
+    //   }
+    // });
   }
 
   close() {

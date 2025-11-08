@@ -19,7 +19,10 @@ class PasswordsController < ApplicationController
     @password.user_passwords.new(user: current_user, role: :owner)
 
     if @password.save
-      redirect_to @password, notice: 'Password created successfully'
+      respond_to do |format|
+        format.html { redirect_to @password, notice: 'Password created successfully' }
+        format.turbo_stream
+      end
     else
       render :new, status: :unprocessable_entity
     end
