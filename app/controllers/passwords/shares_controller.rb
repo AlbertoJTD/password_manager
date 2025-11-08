@@ -13,7 +13,10 @@ class Passwords::SharesController < ApplicationController
     @user_password = @password.user_passwords.create(user_password_params)
 
     if @user_password.persisted?
-      redirect_to @password, notice: 'Password shared successfully'
+      respond_to do |format|
+        format.html { redirect_to @password, notice: 'Password shared successfully' }
+        format.turbo_stream
+      end
     else
       @users = User.all.excluding(@password.users)
       @roles = UserPassword.roles.except(:owner).keys
