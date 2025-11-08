@@ -1,6 +1,6 @@
 es:
   # Application
-  app_name: Gestor de Contraseñas
+  app_name: Password Manager
   
   # Navigation
   home: Inicio
