@@ -2,12 +2,24 @@ class UserPassword < ApplicationRecord
   belongs_to :user
   belongs_to :password
 
-  validates :role, presence: true, inclusion: { in: roles.keys }
-
-  enum role: {
-    owner: 'OWNER',
+  enum :role, {
     viewer: 'VIEWER',
     editor: 'EDITOR',
+    owner: 'OWNER',
     manager: 'MANAGER'
-  }, scopes: true
+  }, default: :viewer, scopes: true
+
+  validates :role, presence: true, inclusion: { in: UserPassword.roles.except(:owner).keys }
+
+  def editable?
+    owner? || editor? || manager?
+  end
+
+  def sharable?
+    owner?
+  end
+
+  def deletable?
+    owner?
+  end
 end

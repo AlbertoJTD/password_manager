@@ -4,6 +4,7 @@ class Passwords::SharesController < ApplicationController
 
   def new
     @users = User.all.excluding(@password.users)
+    @roles = UserPassword.roles.except(:owner).keys
     @user_password = UserPassword.new
   end
 
@@ -13,6 +14,9 @@ class Passwords::SharesController < ApplicationController
     if @user_password.persisted?
       redirect_to @password, notice: 'Password shared successfully'
     else
+      @users = User.all.excluding(@password.users)
+      @roles = UserPassword.roles.except(:owner).keys
+
       render :new, status: :unprocessable_entity
     end
   end
@@ -30,6 +34,6 @@ class Passwords::SharesController < ApplicationController
   end
 
   def user_password_params
-    params.require(:user_password).permit(:user_id)
+    params.require(:user_password).permit(:user_id, :role)
   end
 end
