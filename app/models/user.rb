@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :user_passwords, dependent: :destroy
   has_many :passwords, through: :user_passwords, dependent: :destroy
+  has_many :invitees, class_name: 'User', foreign_key: 'invited_by_id'
 end
