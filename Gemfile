@@ -77,3 +77,5 @@ group :test do
 end
 
 gem "view_component", "~> 4.1"
+
+gem "devise_invitable", "~> 2.0"

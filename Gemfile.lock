@@ -114,6 +114,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise_invitable (2.0.11)
+      actionmailer (>= 5.0)
+      devise (>= 4.6)
     dotenv (2.8.1)
     dotenv-rails (2.8.1)
       dotenv (= 2.8.1)
@@ -329,6 +332,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
+  devise_invitable (~> 2.0)
   dotenv-rails
   faker (~> 3.5)
   importmap-rails
