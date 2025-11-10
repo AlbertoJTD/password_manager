@@ -8,10 +8,17 @@
         </svg>
         <%= t('.title') %>
       </h1>
-      <p class="text-sm text-gray-600 mt-1"><%= t('.description') %></p>
+      <p class="text-sm text-gray-600 mt-1">
+        <%= t('.description') %>
+      </p>
     </div>
 
-    <%= form_with model: current_user_password, url: password_shares_path(password_id: @password.id), method: :post, class: 'mt-6' do |f| %>
+    <%= form_with model: current_user_password, url: password_shares_path(password_id: @password.id),
+                  method: :post, class: 'mt-6',
+                  data: {
+                    controller: 'passwords--shares',
+                    passwords__shares_disabled_field_class: 'bg-gray-200 cursor-not-allowed',
+                    passwords__shares_active_field_class: 'bg-white' } do |f| %>
       <% if f.object.errors.any? %>
         <%= render Shared::ErrorListComponent.new do %>
           <% f.object.errors.full_messages.each do |message| %>
@@ -22,17 +29,37 @@
 
       <div class="space-y-6">
         <!-- User Selection -->
-        <div>
-          <%= f.label :user_id, class: 'block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2' do %>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-500">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
-            </svg>
-            <%= t('.user_label') %>
-          <% end %>
-          <%= f.collection_select :user_id, @users, :id, :email, 
-              { prompt: t('.user_prompt') },
-              { class: 'w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors outline-none bg-white' } %>
-        </div>
+        <% if @my_invites_users.present? %>
+          <div>
+            <%= f.label :user_id, class: 'block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2' do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-500">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+              </svg>
+              <%= t('.invited_user_label') %>
+            <% end %>
+
+            <%= f.select :user_id,
+                options_for_select(@my_invites_users.pluck(:email, :id)),
+                { include_blank: t('.invited_user_prompt') },
+                class: 'w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors outline-none bg-white',
+                data: { passwords__shares_target: 'userSelect', action: 'change->passwords--shares#updateState' } %>
+          </div>
+        <% end %>
+
+        <%# Email field %>
+        <%= f.fields_for :user, User.new do |user_fields| %>
+          <div>
+            <%= f.label :user_email, class: 'block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2' do %>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 text-gray-500">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+              </svg>
+              <%= t('.user_email_label') %>
+            <% end %>
+            <%= user_fields.text_field :email, placeholder: t('.user_email_placeholder'),
+                            data: { passwords__shares_target: 'userEmail', action: 'input->passwords--shares#updateState' },
+                            class: 'w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cyan-500 focus:border-cyan-500 transition-colors outline-none bg-white' %>
+          </div>
+        <% end %>
 
         <!-- Role Selection -->
         <div>
@@ -61,4 +88,3 @@
     <% end %>
   <% end %>
 <% end %>
-  

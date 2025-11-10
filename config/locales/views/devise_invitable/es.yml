@@ -23,6 +23,12 @@ es:
         accept: Aceptar invitación
         accept_until: "Esta invitación expirará en %{due_date}."
         ignore: "Si no quieres aceptar la invitación, por favor ignora este email. Tu cuenta no será creada hasta que accedas al enlace anterior y configures tu contraseña."
+
+    invitable:
+      invitation_status:
+        accepted: Invitación aceptada
+        pending: Pendiente de aceptación
+
   time:
     formats:
       devise:

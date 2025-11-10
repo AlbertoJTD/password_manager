@@ -129,6 +129,18 @@
             <div class="flex-1 min-w-0">
               <p class="text-sm font-medium text-gray-900 truncate"><%= user_password.user.email %></p>
               <p class="text-xs text-gray-500 capitalize"><%= t("activerecord.enums.user_password.role.#{user_password.role}") %></p>
+
+              <% if user_password.user.created_by_invite? %>
+                <% if user_password.user.invitation_accepted? %>
+                  <p class="bg-green-100 rounded-md px-2 py-1 text-xs text-green-600 capitalize w-fit">
+                    <%= t('devise.invitable.invitation_status.accepted') %>
+                  </p>
+                <% else %>
+                  <p class="bg-yellow-100 rounded-md px-2 py-1 text-xs text-yellow-600 capitalize w-fit">
+                    <%= t('devise.invitable.invitation_status.pending') %>
+                  </p>
+                <% end %>
+              <% end %>
             </div>
           </div>
           <%= link_to password_share_path(password, id: user_password.user_id),

@@ -10,6 +10,7 @@ class UserPassword < ApplicationRecord
   }, default: :viewer, scopes: true
 
   validates :role, presence: true, inclusion: { in: UserPassword.roles.keys }
+  accepts_nested_attributes_for :user, allow_destroy: true
 
   def editable?
     owner? || editor? || manager?

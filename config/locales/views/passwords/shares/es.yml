@@ -10,4 +10,9 @@ es:
         user_prompt: Selecciona un usuario...
         role_label: Rol
         role_prompt: Selecciona un rol...
-
+        invited_user_label: Usuarios invitados
+        invited_user_prompt: Selecciona un usuario para compartir la contraseña
+        user_email_label: Email
+        user_email_placeholder: Ingresa el email del usuario que quieres invitar...
+      create:
+        user_not_provided: Usuario o email para invitar no proporcionado
