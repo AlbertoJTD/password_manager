@@ -8,3 +8,4 @@ es:
   logout: Cerrar sesión
   login: Iniciar sesión
   sign_up: Registrarse
+  correct_errors: 'Por favor corrige los siguientes errores:'

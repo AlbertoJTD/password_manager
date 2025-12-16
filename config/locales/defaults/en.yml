@@ -8,4 +8,4 @@ en:
   logout: Logout
   login: Login
   sign_up: Sign up
-
+  correct_errors: 'Please correct the following errors:'
