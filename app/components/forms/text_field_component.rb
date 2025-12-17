@@ -2,7 +2,7 @@
 
 class Forms::TextFieldComponent < ViewComponent::Base
   def initialize(form_object:, attribute:, **options)
-    super
+    super()
     raise ArgumentError, 'form_object must be a form object' unless form_object.is_a?(ActionView::Helpers::FormBuilder)
     raise ArgumentError, 'attribute must be present' if attribute.blank?
 
