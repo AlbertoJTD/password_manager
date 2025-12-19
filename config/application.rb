@@ -35,5 +35,10 @@ module PasswordManager
     config.i18n.available_locales = %i[en es]
     config.i18n.default_locale = :en
     config.i18n.fallbacks = true
+
+    # Active Record Encryption configuration
+    config.active_record.encryption.primary_key = ENV['ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY']
+    config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY']
+    config.active_record.encryption.key_derivation_salt = ENV['ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT']
   end
 end
