@@ -30,7 +30,7 @@
       <%= f.label :username, t('passwords.forms.username_label'), class: 'block text-sm font-medium text-gray-700 mb-2' %>
       <%= render Forms::TextFieldComponent.new(
         form_object: f,
-        attribute: :service,
+        attribute: :username,
         placeholder: t('passwords.forms.username_placeholder')
       ) %>
     </div>
@@ -39,7 +39,7 @@
       <%= f.label :password, t('passwords.forms.password_label'), class: 'block text-sm font-medium text-gray-700 mb-2' %>
       <%= render Forms::TextFieldComponent.new(
         form_object: f,
-        attribute: :service,
+        attribute: :password,
         placeholder: t('passwords.forms.password_placeholder')
       ) %>
     </div>

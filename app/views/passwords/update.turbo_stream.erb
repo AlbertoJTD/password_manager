@@ -1,0 +1,7 @@
+<%= turbo_stream.replace :modal do %>
+  <%= turbo_frame_tag :modal do %>
+    <%= render Shared::ModalComponent.new do %>
+      <%= render partial: 'passwords/show', locals: { password: @password } %>
+    <% end %>
+  <% end %>
+<% end %>

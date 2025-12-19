@@ -32,7 +32,10 @@ class PasswordsController < ApplicationController
 
   def update
     if @password.update(password_params)
-      redirect_to @password, notice: t('passwords.updated')
+      respond_to do |format|
+        format.html { redirect_to @password, notice: t('passwords.updated') }
+        format.turbo_stream
+      end
     else
       render :edit, status: :unprocessable_entity
     end
