@@ -38,3 +38,5 @@ es:
     remove_user_confirm: ¿Estás seguro que deseas eliminar este usuario?
     remove: Eliminar
     password: Contraseña
+    not_authorized_edit: No estás autorizado para editar esta contraseña
+    not_authorized_delete: No estás autorizado para eliminar esta contraseña
