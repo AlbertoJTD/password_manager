@@ -16,3 +16,9 @@ es:
         user_email_placeholder: Ingresa el email del usuario que quieres invitar...
       create:
         user_not_provided: Usuario o email para invitar no proporcionado
+      
+      sharing:
+        shared_successfully: Contraseña compartida exitosamente
+        removed_successfully: Usuario eliminado exitosamente
+        not_authorized: No estás autorizado para compartir esta contraseña
+        not_found: Usuario no encontrado

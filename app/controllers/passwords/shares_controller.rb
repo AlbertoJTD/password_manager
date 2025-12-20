@@ -14,7 +14,7 @@ class Passwords::SharesController < ApplicationController
     @user = find_or_create_user
 
     if @user.blank?
-      current_user_password.errors.add(:base, I18n.t('passwords.shares.create.user_not_provided'))
+      current_user_password.errors.add(:base, t('passwords.shares.create.user_not_provided'))
       return render_new_with_errors
     elsif @user.errors.any?
       current_user_password.errors.add(:base, @user.errors.full_messages.join(', '))
@@ -32,7 +32,7 @@ class Passwords::SharesController < ApplicationController
 
     if @user_password.save
       respond_to do |format|
-        format.html { redirect_to @password, notice: t('sharing.shared_successfully') }
+        format.html { redirect_to @password, notice: t('passwords.shares.sharing.shared_successfully') }
         format.turbo_stream
       end
     else
@@ -42,8 +42,13 @@ class Passwords::SharesController < ApplicationController
 
   def destroy
     @user_password = @password.user_passwords.find_by(user_id: params[:id])
-    @user_password.destroy
-    redirect_to @password, notice: t('sharing.removed_successfully')
+
+    if @user_password
+      @user_password.destroy
+      redirect_to @password, notice: t('passwords.shares.sharing.removed_successfully')
+    else
+      redirect_to @password, alert: t('passwords.shares.sharing.not_found')
+    end
   end
 
   private
@@ -57,7 +62,7 @@ class Passwords::SharesController < ApplicationController
   end
 
   def require_sharable_permissions
-    redirect_to @password, alert: t('sharing.not_authorized') unless current_user_password.sharable?
+    redirect_to @password, alert: t('passwords.shares.sharing.not_authorized') unless current_user_password.sharable?
   end
 
   def find_or_create_user

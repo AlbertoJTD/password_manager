@@ -16,3 +16,9 @@ en:
         user_email_placeholder: Enter the email of the user you want to invite...
       create:
         user_not_provided: User or email to invite not provided
+      
+      sharing:
+        shared_successfully: Password shared successfully
+        removed_successfully: User removed successfully
+        not_authorized: You are not authorized to share this password
+        not_found: User not found
