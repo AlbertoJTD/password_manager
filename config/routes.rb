@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   scope '(:locale)', locale: /en|es/ do
     root 'passwords#index'
 
-    devise_for :users
+    devise_for :users, controllers: { registrations: 'users/registrations' }
     resources :passwords do
       resources :shares, only: %i[new create destroy], module: :passwords
     end
