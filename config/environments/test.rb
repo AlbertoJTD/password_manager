@@ -67,4 +67,5 @@ Rails.application.configure do
   config.active_record.encryption.deterministic_key = ENV['ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY']
   config.active_record.encryption.key_derivation_salt = ENV['ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT']
   config.active_record.encryption.encrypt_fixtures = true
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
