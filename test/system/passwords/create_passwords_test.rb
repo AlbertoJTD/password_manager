@@ -49,12 +49,18 @@ class Passwords::CreatePasswordsTest < ApplicationSystemTestCase
     fill_in 'Password', with: new_password.password
     click_on 'Save Password'
 
+    # Verify the validation errors are displayed
     assert_selector 'div.mb-6.p-4.bg-red-50.border.border-red-200.rounded-lg'
     assert_selector 'h3', text: I18n.t('correct_errors')
     %w[Service Username Password].each do |field|
       assert_selector 'li', text: "#{field} can't be blank"
     end
     assert_no_selector 'li', text: "URL can't be blank"
+
+    # Required input fields should have red borders
+    %w[Service Username Password].each do |field|
+      assert_selector "#password_#{field.downcase}.border-red-500.focus\\:ring-red-500.focus\\:border-red-500"
+    end
   end
 
   test 'user opens and closes the password form modal' do
