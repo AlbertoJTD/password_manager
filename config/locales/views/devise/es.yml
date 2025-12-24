@@ -74,6 +74,12 @@ es:
       send_instructions: "Recibirás un email con instrucciones para desbloquear tu cuenta en unos minutos"
       send_paranoid_instructions: "Si tu cuenta existe, recibirás un email con instrucciones para desbloquear tu cuenta en unos minutos"
       unlocked: "Tu cuenta ha sido desbloqueada. Inicia sesión para continuar."
+      new:
+        title: Reenviar instrucciones de desbloqueo
+        form:
+          email_label: Email
+          email_placeholder: Ingresa tu correo electrónico
+          submit: Reenviar instrucciones de desbloqueo
     shared:
       links:
         login: Iniciar sesión
