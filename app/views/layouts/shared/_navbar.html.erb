@@ -11,8 +11,10 @@
 
   <div class="flex items-center gap-4">
     <div class="flex items-center gap-2">
-      <%= link_to 'EN', url_for(locale: :en), class: "px-2 py-1 rounded #{I18n.locale == :en ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-gray-100'}" %>
-      <%= link_to 'ES', url_for(locale: :es), class: "px-2 py-1 rounded #{I18n.locale == :es ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-gray-100'}" %>
+      <%#= link_to 'EN', url_for(locale: :en), class: "px-2 py-1 rounded #{I18n.locale == :en ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-gray-100'}", data: { turbo: false, turbo_stream: false } %>
+      <%#= link_to 'ES', url_for(locale: :es), class: "px-2 py-1 rounded #{I18n.locale == :es ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-gray-100'}", data: { turbo: false, turbo_stream: false } %>
+      <%= link_to 'EN', locale_switch_path(:en), class: "px-2 py-1 rounded #{I18n.locale == :en ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-gray-100'}" %>
+      <%= link_to 'ES', locale_switch_path(:es), class: "px-2 py-1 rounded #{I18n.locale == :es ? 'bg-blue-500 text-white' : 'text-gray-600 hover:bg-gray-100'}" %>
     </div>
     <ul class="list-none flex gap-2">
       <% if user_signed_in? %>
