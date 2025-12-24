@@ -51,6 +51,15 @@ es:
       signed_in: "Iniciaste sesión correctamente."
       signed_out: "Cerraste sesión correctamente."
       already_signed_out: "Se cerró sesión correctamente."
+      new:
+        form:
+          email_label: "Email"
+          email_placeholder: "Ingresa tu correo electrónico"
+          password_label: Contraseña
+          password_placeholder: Ingresa tu contraseña
+          remember_me_label: Recordarme
+        title: Iniciar sesión
+        submit: Iniciar sesión
     unlocks:
       send_instructions: "Recibirás un email con instrucciones para desbloquear tu cuenta en unos minutos"
       send_paranoid_instructions: "Si tu cuenta existe, recibirás un email con instrucciones para desbloquear tu cuenta en unos minutos"
