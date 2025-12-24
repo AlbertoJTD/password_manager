@@ -1,29 +1,69 @@
-<h2>Sign up</h2>
+<div class="max-w-md mx-auto mt-8">
+  <h2 class="text-3xl font-bold text-gray-900 mb-6"><%= t('.title') %></h2>
+  
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'space-y-6' }) do |f| %>
+    <% if resource.errors.any? %>
+      <%= render Shared::ErrorListComponent.new do %>
+        <% resource.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      <% end %>
+    <% end %>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+    <div>
+      <%= f.label :email, t('.form.email_label'), class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <% has_email_errors = resource.errors[:email].any? %>
+      <%= f.email_field :email, 
+          autofocus: true, 
+          autocomplete: "email",
+          placeholder: t('.form.email_placeholder'),
+          class: class_names(
+            'w-full px-4 py-2 border rounded-lg transition-colors outline-none',
+            {
+              'border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500' => !has_email_errors,
+              'border-red-500 focus:ring-red-500 focus:border-red-500' => has_email_errors
+            }
+          ) %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div>
+      <%= f.label :password, t('.form.password_label', minimum_password_length: @minimum_password_length), class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <% has_password_errors = resource.errors[:password].any? %>
+      <%= f.password_field :password, 
+          autocomplete: "current-password",
+          placeholder: t('.form.password_placeholder'),
+          class: class_names(
+            'w-full px-4 py-2 border rounded-lg transition-colors outline-none',
+            {
+              'border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500' => !has_password_errors,
+              'border-red-500 focus:ring-red-500 focus:border-red-500' => has_password_errors
+            }
+          ) %>
+    </div>
+
+    <div>
+      <%= f.label :password, t('.form.password_confirmation_label'), class: 'block text-sm font-medium text-gray-700 mb-2' %>
+      <% has_password_errors = resource.errors[:password].any? %>
+      <%= f.password_field :password, 
+          autocomplete: "current-password",
+          placeholder: t('.form.password_confirmation_placeholder'),
+          class: class_names(
+            'w-full px-4 py-2 border rounded-lg transition-colors outline-none',
+            {
+              'border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500' => !has_password_errors,
+              'border-red-500 focus:ring-red-500 focus:border-red-500' => has_password_errors
+            }
+          ) %>
+    </div>
+
+    <div class="flex items-center justify-between pt-4">
+      <%= f.submit t('.form.submit'), 
+          class: 'px-6 py-2.5 bg-blue-500 text-white rounded-lg font-medium hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors' %>
+    </div>
+  <% end %>
+
+  <div class="mt-6">
+    <%= render "devise/shared/links" %>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

@@ -47,6 +47,16 @@ es:
       update_needs_confirmation: "Actualizaste tu cuenta correctamente, pero tenemos que revalidar tu email. Revisa tu correo para confirmar la dirección."
       updated: "Actualizaste tu cuenta correctamente."
       updated_but_not_signed_in: "Actualizaste tu cuenta correctamente, pero tienes que iniciar sesión nuevamente porque tu contraseña ha cambiado."
+      new:
+        title: Registrarse
+        form:
+          email_label: Email
+          email_placeholder: Ingresa tu correo electrónico
+          password_label: Contraseña (al menos %{minimum_password_length} caracteres)
+          password_placeholder: Ingresa tu contraseña
+          password_confirmation_label: Confirmación de contraseña
+          password_confirmation_placeholder: Ingresa tu confirmación de contraseña
+          submit: Registrarse
     sessions:
       signed_in: "Iniciaste sesión correctamente."
       signed_out: "Cerraste sesión correctamente."
