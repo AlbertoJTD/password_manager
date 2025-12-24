@@ -38,6 +38,12 @@ es:
       send_paranoid_instructions: "Si tu email existe en el sistema, recibirás un email con instrucciones para reiniciar tu contraseña en unos minutos."
       updated: "Tu contraseña fue modificada correctamente. Has iniciado sesión."
       updated_not_active: "Tu contraseña fue modificada correctamente."
+      new:
+        title: ¿Olvidaste tu contraseña?
+        form:
+          email_label: Email
+          email_placeholder: Ingresa tu correo electrónico
+          submit: Enviar instrucciones para reiniciar contraseña
     registrations:
       destroyed: "Adiós, tu cuenta ha sido eliminada. Esperamos verte de vuelta pronto!"
       signed_up: "Bienvenido! Te has registrado correctamente."
