@@ -6,44 +6,34 @@ module Authentication
       @user = users(:joe_doe)
     end
 
-    test 'user logs in (English)' do
-      visit new_user_session_path
-      fill_in 'Email', with: @user.email
-      fill_in 'Password', with: 'password'
-      click_on 'Log in'
+    I18n.available_locales.each do |locale|
+      config = {
+        password_label: I18n.t('devise.sessions.new.form.password_label', locale: locale),
+        submit: I18n.t('devise.sessions.new.submit', locale: locale),
+        heading: I18n.t('passwords.index.title', locale: locale)
+      }.freeze
 
-      assert_current_path root_path(I18n.locale)
-      assert_selector 'h1', text: 'All Passwords'
-    end
+      test "user logs in (#{locale})" do
+        visit new_user_session_path(locale: locale)
 
-    test 'user tries to log in with invalid credentials (English)' do
-      visit new_user_session_path(I18n.locale)
-      fill_in 'Email', with: @user.email
-      fill_in 'Password', with: 'wrong_password'
-      click_on 'Log in'
+        fill_in 'Email', with: @user.email
+        fill_in config[:password_label], with: 'password'
+        click_button config[:submit]
 
-      assert_current_path new_user_session_path(I18n.locale)
-      assert_selector 'p.alert', text: 'Invalid Email or password.'
-    end
+        assert_current_path root_path(locale: locale)
+        assert_selector 'h1', text: config[:heading]
+      end
 
-    test 'user logs in (Spanish)' do
-      visit new_user_session_path(locale: :es)
-      fill_in 'Email', with: @user.email
-      fill_in 'Contraseña', with: 'password'
-      click_button 'Iniciar sesión'
+      test "user tries to log in with invalid credentials (#{locale})" do
+        visit new_user_session_path(locale: locale)
 
-      assert_current_path root_path(locale: :es)
-      assert_selector 'h1', text: 'Todas las contraseñas'
-    end
+        fill_in 'Email', with: @user.email
+        fill_in config[:password_label], with: 'wrong_password'
+        click_button config[:submit]
 
-    test 'user tries to log in with invalid credentials (Spanish)' do
-      visit new_user_session_path(locale: :es)
-      fill_in 'Email', with: @user.email
-      fill_in 'Contraseña', with: 'wrong_password'
-      click_button 'Iniciar sesión'
-
-      assert_current_path new_user_session_path(locale: :es)
-      assert_selector 'p.alert', text: 'Email y/o contraseña inválidos.'
+        assert_current_path new_user_session_path(locale: locale)
+        assert_selector 'p.alert', text: I18n.t('devise.failure.invalid', locale: locale, authentication_keys: 'Email')
+      end
     end
   end
 end
